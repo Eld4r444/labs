@@ -1,0 +1,236 @@
+# Лабораторная работа №1. Все команды по порядку (Git Bash / PowerShell).
+# Задание 1
+$ mkdir git_lab
+$ cd git_lab
+$ git init -b main
+Initialized empty Git repository in /tmp/claude-0/-home-claude/b7178f4c-f5f7-56fa-9864-3d1a96b9ac6a/scratchpad/lab1/git_lab/.git/
+$ git status
+On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+# Задание 2
+$ echo "Первая версия файла" > notes.txt
+$ git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	notes.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+$ git add notes.txt
+$ git status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   notes.txt
+
+$ git commit -m "Добавлен файл notes.txt"
+[main (root-commit) 3e334ad] Добавлен файл notes.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 notes.txt
+$ git log
+commit 3e334adb4f9a5e7635d95e5f58cb03aa16964e19
+Author: Гутаев Эльдар <eld4r444@users.noreply.github.com>
+Date:   Sun Nov 1 20:09:54 2026 +0300
+
+    Добавлен файл notes.txt
+$ git log --oneline
+3e334ad Добавлен файл notes.txt
+# Задание 3
+$ echo "Цель: изучить основы Git" >> notes.txt
+$ echo "Рабочий каталог, индекс и коммит" >> notes.txt
+$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   notes.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git diff
+diff --git a/notes.txt b/notes.txt
+index 0df05a3..99f903f 100644
+--- a/notes.txt
++++ b/notes.txt
+@@ -1 +1,3 @@
+ Первая версия файла
++Цель: изучить основы Git
++Рабочий каталог, индекс и коммит
+$ git add notes.txt
+$ git diff --staged
+diff --git a/notes.txt b/notes.txt
+index 0df05a3..99f903f 100644
+--- a/notes.txt
++++ b/notes.txt
+@@ -1 +1,3 @@
+ Первая версия файла
++Цель: изучить основы Git
++Рабочий каталог, индекс и коммит
+$ git commit -m "Добавлены цель и основные понятия"
+[main 4277d42] Добавлены цель и основные понятия
+ 1 file changed, 2 insertions(+)
+# Задание 4
+$ echo "git add добавляет изменения в индекс" >> notes.txt
+$ git commit -am "Добавлено описание git add"
+[main 32e2455] Добавлено описание git add
+ 1 file changed, 1 insertion(+)
+$ echo "git commit сохраняет изменения в истории" >> notes.txt
+$ git commit -am "Добавлено описание git commit"
+[main b12d669] Добавлено описание git commit
+ 1 file changed, 1 insertion(+)
+$ echo "git log показывает историю коммитов" >> notes.txt
+$ git commit -am "Добавлено описание git log"
+[main 117f483] Добавлено описание git log
+ 1 file changed, 1 insertion(+)
+$ git log --oneline
+117f483 Добавлено описание git log
+b12d669 Добавлено описание git commit
+32e2455 Добавлено описание git add
+4277d42 Добавлены цель и основные понятия
+3e334ad Добавлен файл notes.txt
+# Задание 5
+$ git switch -c experiment
+Switched to a new branch 'experiment'
+$ echo "Эксперимент в отдельной ветке" > experiment.txt
+$ git add experiment.txt
+$ git commit -m "Добавлен файл experiment.txt"
+[experiment 4eeab01] Добавлен файл experiment.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 experiment.txt
+$ git log --oneline
+4eeab01 Добавлен файл experiment.txt
+117f483 Добавлено описание git log
+b12d669 Добавлено описание git commit
+32e2455 Добавлено описание git add
+4277d42 Добавлены цель и основные понятия
+3e334ad Добавлен файл notes.txt
+$ git switch main
+Switched to branch 'main'
+$ ls
+notes.txt
+# Задание 6
+$ git merge experiment
+Updating 117f483..4eeab01
+Fast-forward
+ experiment.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 experiment.txt
+$ ls
+experiment.txt
+notes.txt
+$ git log --oneline --graph
+* 4eeab01 Добавлен файл experiment.txt
+* 117f483 Добавлено описание git log
+* b12d669 Добавлено описание git commit
+* 32e2455 Добавлено описание git add
+* 4277d42 Добавлены цель и основные понятия
+* 3e334ad Добавлен файл notes.txt
+# Задание 7
+$ echo "Временная строка" >> notes.txt
+$ git diff
+diff --git a/notes.txt b/notes.txt
+index 0c2402b..6a7bf73 100644
+--- a/notes.txt
++++ b/notes.txt
+@@ -4,3 +4,4 @@
+ git add добавляет изменения в индекс
+ git commit сохраняет изменения в истории
+ git log показывает историю коммитов
++Временная строка
+$ git restore notes.txt
+$ git status
+On branch main
+nothing to commit, working tree clean
+# Задание 8
+$ echo "Изменение для индекса" >> notes.txt
+$ git add notes.txt
+$ git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   notes.txt
+
+$ git restore --staged notes.txt
+$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   notes.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git restore notes.txt
+# Задание 9
+$ echo "Экспериментальная строка" >> notes.txt
+$ git commit -am "Экспериментальное изменение"
+[main 2b60641] Экспериментальное изменение
+ 1 file changed, 1 insertion(+)
+$ git log --oneline
+2b60641 Экспериментальное изменение
+4eeab01 Добавлен файл experiment.txt
+117f483 Добавлено описание git log
+b12d669 Добавлено описание git commit
+32e2455 Добавлено описание git add
+4277d42 Добавлены цель и основные понятия
+3e334ad Добавлен файл notes.txt
+$ git revert --no-edit HEAD
+[main 888c9de] Revert "Экспериментальное изменение"
+ Date: Sun Nov 1 20:09:55 2026 +0300
+ 1 file changed, 1 deletion(-)
+$ git log --oneline
+888c9de Revert "Экспериментальное изменение"
+2b60641 Экспериментальное изменение
+4eeab01 Добавлен файл experiment.txt
+117f483 Добавлено описание git log
+b12d669 Добавлено описание git commit
+32e2455 Добавлено описание git add
+4277d42 Добавлены цель и основные понятия
+3e334ad Добавлен файл notes.txt
+# Задание 10
+$ git switch -c todo-list
+Switched to a new branch 'todo-list'
+$ echo "1. Повторить команды Git" > todo.txt
+$ git add todo.txt
+$ git commit -m "Добавлен список дел"
+[todo-list 8883565] Добавлен список дел
+ 1 file changed, 1 insertion(+)
+ create mode 100644 todo.txt
+$ echo "2. Ответить на контрольные вопросы" >> todo.txt
+$ git commit -am "Добавлен второй пункт в список дел"
+[todo-list 8efc9fb] Добавлен второй пункт в список дел
+ 1 file changed, 1 insertion(+)
+$ git diff HEAD~1 HEAD
+diff --git a/todo.txt b/todo.txt
+index 26b2c07..c72212c 100644
+--- a/todo.txt
++++ b/todo.txt
+@@ -1 +1,2 @@
+ 1. Повторить команды Git
++2. Ответить на контрольные вопросы
+$ git switch main
+Switched to branch 'main'
+$ git merge todo-list
+Updating 888c9de..8efc9fb
+Fast-forward
+ todo.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 todo.txt
+$ git log --oneline --graph --all
+* 8efc9fb Добавлен второй пункт в список дел
+* 8883565 Добавлен список дел
+* 888c9de Revert "Экспериментальное изменение"
+* 2b60641 Экспериментальное изменение
+* 4eeab01 Добавлен файл experiment.txt
+* 117f483 Добавлено описание git log
+* b12d669 Добавлено описание git commit
+* 32e2455 Добавлено описание git add
+* 4277d42 Добавлены цель и основные понятия
+* 3e334ad Добавлен файл notes.txt

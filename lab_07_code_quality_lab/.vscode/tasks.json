@@ -1,0 +1,89 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Задание 1: окружение, ruff и pytest",
+            "type": "shell",
+            "command": "python -m venv .venv; python -m pip install ruff pytest; python -m pip freeze > requirements.txt; Get-Content requirements.txt",
+            "options": {
+                "env": {
+                    "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}",
+                    "PYTHONPATH": "${workspaceFolder}"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ruff format --check .",
+            "type": "shell",
+            "command": "ruff format --check .",
+            "options": {
+                "env": {
+                    "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}",
+                    "PYTHONPATH": "${workspaceFolder}"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ruff format .",
+            "type": "shell",
+            "command": "ruff format .",
+            "options": {
+                "env": {
+                    "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}",
+                    "PYTHONPATH": "${workspaceFolder}"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ruff check .",
+            "type": "shell",
+            "command": "ruff check .",
+            "options": {
+                "env": {
+                    "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}",
+                    "PYTHONPATH": "${workspaceFolder}"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ruff check . --fix",
+            "type": "shell",
+            "command": "ruff check . --fix",
+            "options": {
+                "env": {
+                    "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}",
+                    "PYTHONPATH": "${workspaceFolder}"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "pytest",
+            "type": "shell",
+            "command": "pytest -v",
+            "options": {
+                "env": {
+                    "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}",
+                    "PYTHONPATH": "${workspaceFolder}"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ruff format . + ruff check . + pytest",
+            "type": "shell",
+            "command": "ruff format .; ruff check .; pytest -v",
+            "options": {
+                "env": {
+                    "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}",
+                    "PYTHONPATH": "${workspaceFolder}"
+                }
+            },
+            "problemMatcher": []
+        }
+    ]
+}
